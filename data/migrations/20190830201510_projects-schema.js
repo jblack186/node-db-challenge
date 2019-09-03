@@ -16,13 +16,15 @@ exports.up = function(knex) {
             .notNullable()
             .references('id')
             .inTable('projects')
+            .onDelete('RESTRICT')
+            .onUpdate('CASCADE')
 
     })
-    .createTable('resource', tbl => {
+    .createTable('resources', tbl => {
         tbl.increments();
         tbl.string('resource_name', 128).notNullable();
         tbl.string('description', 300)
-        tbl.integer('task_id')
+        tbl.integer('project_id')
             .unsigned()
             .notNullable()
             .references('id')
